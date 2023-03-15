@@ -7,15 +7,17 @@
 # Примеры/Тесты:
 # 4 4 -> 2 2
 # 5 6 -> 2 3
-
+import math
 summ_number = 374
 proizv_number = 9048
 
 Discrim = summ_number ** 2 - 4 * proizv_number
 
 if Discrim > 0:
-    x1 = int((summ_number + (Discrim ** 0.5)) // 2)
-    x2 = int((summ_number - (Discrim ** 0.5)) // 2)
+    x1 = int((summ_number + math.sqrt(Discrim)) // 2)
+    # x1 = int((summ_number + (Discrim ** 0.5)) // 2)
+    x2 = int((summ_number - math.sqrt(Discrim)) // 2)
+    # x2 = int((summ_number - (Discrim ** 0.5)) // 2)
     y1 = summ_number - x1
     y2 = summ_number - x2
 
@@ -25,7 +27,8 @@ if Discrim > 0:
         print('Решений нет')
 
 elif Discrim == 0:
-    x = int((summ_number + Discrim ** 0.5) // 2)
+    x = int((summ_number + math.sqrt(Discrim)) // 2)
+    # x = int((summ_number + Discrim ** 0.5) // 2)
     y = summ_number - x
     print(f'Задуманы числа {x} и {y}')
 else:
