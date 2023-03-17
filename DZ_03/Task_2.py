@@ -1,6 +1,6 @@
-# 3.2[18]: Требуется найти в списке целых чисел самый близкий 
-# по величине элемент к заданному числу X. 
-# Пользователь вводит это число с клавиатуры, список можно считать заданным. 
+# 3.2[18]: Требуется найти в списке целых чисел самый близкий
+# по величине элемент к заданному числу X.
+# Пользователь вводит это число с клавиатуры, список можно считать заданным.
 # Введенное число не обязательно содержится в списке.
 # Примеры/Тесты:
 # Input: [10, 5, 7, 3, 3, 2, 5, 7, 3, 8], X = 0
@@ -8,26 +8,19 @@
 # Input: [10, 5, 7, 3, 3, 2, 5, 7, 3, 8], X = 9
 # Output: 10
 
-elements = [10, 5, 7, 3, 3, 2, 5, 7, 3, 8]
-serch_number = 9
-summ_serch = 0
-near_number = 0 
-index = 0
+elements = [10, 5, 7, 3, 3, 2, 5, 7, 3, 8, 6]
+# elements = [1, 2, 3, 4, 6, 7, 8, 9, 10]
 
-for i in range(len(elements)):
-    if elements[i] == serch_number:
-        summ_serch += 1
+serch_number = int(input('Введите число для поиска в списке\nX = '))
+near_number = len(elements) # спросить на семинаре про начальное значение
+near_index = 0
 
-if summ_serch == 0:
-    for i in elements:# range(len(elements)):
-        if serch_number > elements[i]:
-            print(elements[i])
-            temp = elements[i] - serch_number # 1
-            print(temp)
-            index = i  
-            print(index)                       # 0
+if elements.count(serch_number) == 0:
+    for i in range(len(elements)):
+        if serch_number < elements[i]:
+            difference = elements[i] - serch_number
+            if near_number > difference:
+                near_number = difference
+                near_index = i
 
-        # else:
-
-
-print(elements[index])
+print(f'Ближайший больший к {serch_number} это {elements[near_index]}' if elements.count(serch_number) == 0 else f'Число {serch_number} есть в списке')
