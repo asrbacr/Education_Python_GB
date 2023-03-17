@@ -15,10 +15,11 @@
 elements = [10, 5, 7, 3, 3, 0, 5, 7, 2, 8]
 serch_number = int(input("Введите число для поиска в списке \n x = "))
 
-summ_serch = 0
-
-for i in range(len(elements)):
-    if elements[i] == serch_number:
-        summ_serch += 1
+# summ_serch = 0
+# for i in range(len(elements)):
+#     if elements[i] == serch_number:
+#         summ_serch += 1
     
-print(summ_serch if summ_serch > 0 else '-1')
+# print(summ_serch if summ_serch > 0 else '-1')
+
+print(elements.count(serch_number) if elements.count(serch_number) > 0 else '-1')
