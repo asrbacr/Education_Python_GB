@@ -26,7 +26,7 @@
 # Output:  12
 # Input:   notebook
 # Output:  14
-'''
+
 summ_point_user = 0
 
 point_rus = {'А': 1, 'В': 1, 'Е': 1, 'И': 1, 'Н': 1, 'О': 1, 'Р': 1, 'С': 1, 'Т': 1,
@@ -38,36 +38,43 @@ point_rus = {'А': 1, 'В': 1, 'Е': 1, 'И': 1, 'Н': 1, 'О': 1, 'Р': 1, 'С'
              'Ф': 10, 'Щ': 10, 'Ъ': 10
              }
 
-point_eng = {'A': 1, 'E': 1, 'I': 1, 'O': 1, 'U': 1, 'L': 1, 'N': 1, 'S': 1, 'T': 1, 'R': 1,
-             'D': 2, 'G': 2, 'B': 3, 'C': 3, 'M': 3, 'P': 3,
-             'F': 4, 'H': 4, 'V': 4, 'W': 4, 'Y': 4,
-             'K': 5, 'J': 8, 'X': 8, 'Q': 10, 'Z': 10
-             }
+point_eng = {1: 'AEIOULNSTR',
+             2: 'DG',
+             3: 'BCMP',
+             4: 'FHVWY',
+             5: 'K',
+             8: 'JX',
+             10: 'QZ'}
 
-point = point_rus | point_eng
-text = input('Введите слово для подсчёта количества очков:\n')
+# point = point_rus | point_eng
+
+# text = input('Введите слово для подсчёта количества очков:\n')
+text = 'nuar'
 string_user = text.upper()
 
-for i in range(len(string_user)):
-    # print(f'Индекс {i} - {string_user[i]}')
-    if string_user[i] in point:
-        # print(f'Значение {string_user[i]} - {point_rus[string_user[i]]}')
-        summ_point_user += point[string_user[i]]
+# lang = int(input('Какой алфавит будет использоваться для подсчёта очко?\nВведите цифру: 1 - русский, 2 - английский\n'))
+lang = 2
+
+if lang == 1:
+    # тут считается сумма, когда ключ-буква, значение-цыфра
+    for i in range(len(string_user)):
+        if string_user[i] in point_rus:
+            summ_point_user += point_rus[string_user[i]]
+elif lang == 2:
+    # тут считается сумма, когда ключ-цыфра,
+    for i in string_user:
+        print(f'Буква - {i}')
+        for k in point_eng:
+            # for k in point_eng:
+
+            print(f'k значение - {k}')
+            # print(f'point_eng значение - {point_eng}')
+            if i in point_eng[k]:
+                summ_point_user += k
+
+
+else:
+    print('Вы не выбрали язык')
+
 
 print(f'Ваше кол-во очков: {summ_point_user}')
-'''
-
-d = {1: {'А', 'В', 'Е', 'И', 'Н', 'О', 'Р', 'С', 'Т'},
-     2: {'Д', 'К', 'Л', 'М', 'П', 'У'}}
-text = 'НУАР'
-
-summ = 0
-for i in text:
-    print(f'i = {i}')
-    for k in d:
-        print(f'k = {k}')
-        print(f'd[{k}] = {d[k]}')
-        if i == d[k]:
-            summ += k    
-print(summ)
-        # print(d[k], end=", ")
