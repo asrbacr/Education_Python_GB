@@ -46,14 +46,12 @@ point_eng = {1: 'AEIOULNSTR',
              8: 'JX',
              10: 'QZ'}
 
-# point = point_rus | point_eng
-
-# text = input('Введите слово для подсчёта количества очков:\n')
-text = 'nuar'
+text = input('Введите слово для подсчёта количества очков:\n')
+# text = 'nuar'
 string_user = text.upper()
 
-# lang = int(input('Какой алфавит будет использоваться для подсчёта очко?\nВведите цифру: 1 - русский, 2 - английский\n'))
-lang = 2
+lang = int(input('Какой алфавит будет использоваться для подсчёта очко?\nВведите цифру: 1 - русский, 2 - английский\n'))
+# lang = 2
 
 if lang == 1:
     # тут считается сумма, когда ключ-буква, значение-цыфра
@@ -61,20 +59,12 @@ if lang == 1:
         if string_user[i] in point_rus:
             summ_point_user += point_rus[string_user[i]]
 elif lang == 2:
-    # тут считается сумма, когда ключ-цыфра,
+    # тут считается сумма, когда ключ-цыфра, буква-значение
     for i in string_user:
-        print(f'Буква - {i}')
         for k in point_eng:
-            # for k in point_eng:
-
-            print(f'k значение - {k}')
-            # print(f'point_eng значение - {point_eng}')
             if i in point_eng[k]:
                 summ_point_user += k
-
-
 else:
     print('Вы не выбрали язык')
-
 
 print(f'Ваше кол-во очков: {summ_point_user}')
