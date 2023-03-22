@@ -12,8 +12,8 @@
 # Input2: 3 9 12 15 18
 # Output: Повторяющихся чисел нет
 
-input1 = "2 4 6 8 10 10 8 6 4 2"
-input2 = "3 9 12 15 18"
+input1 = "2 4 6 8 10 12 10 8 6 4 2"
+input2 = "3 6 9 12 15 18"
 
 list_1 = input1.split()
 list_2 = input2.split()
@@ -29,4 +29,5 @@ for i in set_1:
     if len(result_set) == 0:
         result_set.append("Повторяющихся чисел нет")
 
-print(result_set)
+for i in result_set:
+    print(i, end=" ")
