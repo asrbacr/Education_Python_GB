@@ -18,10 +18,10 @@
 # (**) Усложнение. Присвоение значений переменным a1,d,n запишите, 
 # используя только один input, в одну строку, вам понадобится распаковка и Comprehension или map
 
-# temp = input('Введите 3 числа по маске\nНачальное_значение Шаг Сколько_элементов\n')
+temp = input('Введите 3 числа по маске\nНачальное_значение Шаг Сколько_элементов\n')
 # input_user = list(map(int, temp.split()))
-# start_progression, step_progression, count_progression = list(map(int, temp.split()))
-start_progression, step_progression, count_progression = 7, 2, 5
+start_progression, step_progression, count_progression = list(map(int, temp.split()))
+# start_progression, step_progression, count_progression = 7, 2, 5
 
 def summ_progression(start_progression, step_progression, count_progression):
     list_progression = []
