@@ -19,13 +19,8 @@
 # используя только один input, в одну строку, вам понадобится распаковка и Comprehension или map
 
 temp = input('Введите 3 числа по маске\nНачальное_значение Шаг Сколько_элементов\n')
-input_user = int(temp.strip(" "))
-print(input_user)
-# input_user = [7, 2, 5]
-# start_progression = 7
-# step_progression = 2
-# count_progression = 5
-# start_progression, step_progression, count_progression = input_user
+input_user = list(map(int, temp.split()))
+start_progression, step_progression, count_progression = input_user
 
 def summ_progression(start_progression, step_progression, count_progression):
     list_progression = []
@@ -36,4 +31,4 @@ def summ_progression(start_progression, step_progression, count_progression):
         i += 1
     return list_progression
 
-# print(summ_progression(start_progression, step_progression, count_progression))
+print(summ_progression(start_progression, step_progression, count_progression))
