@@ -24,8 +24,6 @@ max_serch = 0
 
 
 def serch_idx(list_1, min_serch, max_serch):
-    # min_serch = 15
-    # max_serch = 12
     if min_serch > max_serch:
         min_serch, max_serch = max_serch, min_serch
     new_list = []
@@ -34,4 +32,16 @@ def serch_idx(list_1, min_serch, max_serch):
             new_list.append(i)
     return new_list
  
-print(serch_idx(list_1, min_serch, max_serch))
+def serch_idx_return_el(list_1, min_serch, max_serch):
+    # min_serch = 15
+    # max_serch = 12
+    if min_serch > max_serch:
+        min_serch, max_serch = max_serch, min_serch
+    new_list = []
+    new_list.append([(i, list_1(i)) for i in range(len(list_1)) if (min_serch <= list_1[i] <= max_serch)])
+    # for i in range(len(list_1)):
+    #     if min_serch <= list_1[i] <= max_serch:
+    #         # new_list.append(i)
+    return new_list
+
+print(serch_idx_return_el(list_1, min_serch, max_serch))
