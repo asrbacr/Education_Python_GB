@@ -23,33 +23,31 @@
 #     <function_name>("Трам-пара-папам-парам-па-пам-пам-па Пум-пурум-пу-пурум-трам-пам-па") -> (False, [{'а': 11}, {'у': 6, 'а': 3}])
 #     <function_name>("Пам-парам-пурум Пум-пурум-карам") -> (True, [{'а': 3, 'у': 2}, {'у': 3, 'а': 2}])
 
-text = "пара-ра-рам рам-пам-папам па-ра-па-дам"
-# text = "пара-ра-рам рам-пуум-пупам па-ре-по-дам"
+# text = "пара-ра-рам рам-пам-папам па-ра-па-дам"
+text = "пара-ра-рам рам-пуум-пупам па-ре-по-дам"
+# text = "Пам-парам-пурум Пум-пурум-карам"
 
-list_text = text.split()
-res_list = []
-# print(list_text)
+def rhythm_in_text(text):
+    vowels_rus = {'а','у','о','ы','и','э','я','ю','ё','е'}
+    list_text = text.split()
+    res_list = []
+    result_serch_text = {}
 
-vowels_rus = {'а','у','о','ы','и','э','я','ю','ё','е'}
-# for idx in range(len(list_text)):
-result_serch_text = {}
-for el in list_text:
-    res = 0
-    for i, k in enumerate(el):
-        if k in vowels_rus:
-            res += 1
-            result_serch_text[el] = res
+    for el in list_text:
+        res = 0
+        for i, k in enumerate(el):
+            if k in vowels_rus:
+                res += 1
+                result_serch_text[el] = res
 
-print(result_serch_text)
+    res_sum = []
+    [res_sum.append(result_serch_text[key]) for key in result_serch_text.keys()]
 
-res_sum = []
-for i in result_serch_text.items():
-    res_sum.append(i)
+    return True if len(set(res_sum)) == 1 else False
 
-print(res_sum)
+print(rhythm_in_text(text))
 
-if set(res_sum) == 1:
-    print(True)
+#---Попробую решить другим способом ↓
 
 # print(result_serch_text)
 
