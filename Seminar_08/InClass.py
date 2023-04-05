@@ -30,28 +30,14 @@ phonebook = {}
 phonebook_last_id = 0
 
 
+# Create: Создание новой записи в справочнике: ввод всех полей новой записи, занесение ее в справочник.
 def create(db: dict, id: int, surname: str, name: str, phone: str, discription: str) -> tuple:  # data_base
     db[id] = {"surname": surname, 'name': name,
               'phone': phone, 'discription': discription}
     id += 1
     return db, id
 
-
-def read(db: dict, surname_filter: str) -> int:
-    for _id in db:
-        if surname_filter.lower() in db[_id]['surname'].lower():
-            return _id
-
-
-def print_record(db: dict, _id: int):
-    print(f'{"="*30}\n{db[_id]}\n{"="*30}\n')
-    # alternative:
-    # if _id is not None:
-    #     print(f'{"="*30}\n{db[_id]}\n{"="*30}\n')
-    # else:
-    #     print(f'{"="*30}\nЗапись не найдена!\n{"="*30}\n')
-
-
+# форма для добавления записи
 def get_user_data() -> tuple:
     surname = input("Введите фамилию > ")
     name = input("Введите имя > ")
@@ -60,11 +46,29 @@ def get_user_data() -> tuple:
     return surname, name, phone, discription
 
 
+# Read: он же Select. Выбор записей, удовлетворяющих заданном фильтру: по первой части фамилии человека. Берем первое совпадение по фамилии.
+def read(db: dict, surname_filter: str) -> int:
+    for _id in db:
+        if surname_filter.lower() in db[_id]['surname'].lower():
+            return _id
+
+
+# поиск по фамилии
 def get_surname() -> str:
     surname = input("Введите искомую фамилию > ")
     return surname
 
 
+# распечатать в консоль результат поиска
+def print_record(db: dict, _id: int):
+    print(f'{"="*30}\n{db[_id]}\n{"="*30}\n')
+    # alternative:
+    # if _id is not None:
+    #     print(f'{"="*30}\n{db[_id]}\n{"="*30}\n')
+    # else:
+    #     print(f'{"="*30}\nЗапись не найдена!\n{"="*30}\n')
+
+# промежуточная печать в консоль
 def print_data(db: dict) -> None:
     for _id, data in db.items():
         print(
@@ -78,7 +82,7 @@ def export_db(db: dict, filepath: str, delimeter: str = '#') -> None:
             file.write(
                 f"{data['surname']}{delimeter}{data['name']}{delimeter}{data['phone']}{delimeter}{data['discription']}\n")
 
-
+# имя файла для экспорта
 def get_file_name() -> str:
     return input("Введите имя файла: ")
 
@@ -95,6 +99,40 @@ def import_db(db: dict, last_id: int, filepath: str, delimeter: str = '#') -> tu
     return db, last_id
 
 # Update: Изменение полей выбранной записи. Выбор записи как и в Read, заполнение новыми значениями.
+def merge_db(db: dict, last_id: int) -> dict:
+    return NotImplementedError
+
+
+# Переписал меню
+def menu(db: dict, last_id: int) -> None:
+    x = True
+    while x == True:
+        print("Возможные действия: ")
+        print("1. Создать запись: ")
+        print("2. Вывести имеющиеся данные: ")
+        print("3. Экспортировть данные в файл: ")
+        print("4. Импортировать данные из файла: ")
+        print("5. Найти контакт: ")
+        print("6. Выход")
+        user_input = input("Введите действие > ")
+        match user_input:
+            case "1":
+                record = get_user_data()
+                db, last_id = create(db, last_id, *record)
+            case "2":
+                print_data(db)
+            case "3":
+                export_db(db, get_file_name())
+            case "4":
+                db, last_id = import_db(db, last_id, 'data08_1.txt')
+            case "5":
+                found_id = read(db, get_surname())
+                try:
+                    print_record(db, found_id)
+                except KeyError:
+                    print(f'\n{"="*30}\nЗапись не найдена!\n{"="*30}\n')
+            case "6":
+                x = False
 
 
 # def menu(db: dict, last_id: int) -> None:
@@ -126,36 +164,5 @@ def import_db(db: dict, last_id: int, filepath: str, delimeter: str = '#') -> tu
 #         else:
 #             break
 
-# Переписал меню
-
-def menu(db: dict, last_id: int) -> None:
-    x = True
-    while x == True:
-        print("Возможные действия: ")
-        print("1. Создать запись: ")
-        print("2. Вывести имеющиеся данные: ")
-        print("3. Экспортировть данные в файл: ")
-        print("4. Импортировать данные из файла: ")
-        print("5. Найти контакт: ")
-        print("6. Выход")
-        user_input = input("Введите действие > ")
-        match user_input:
-            case "1":
-                record = get_user_data()
-                db, last_id = create(db, last_id, *record)
-            case "2":
-                print_data(db)
-            case "3":
-                export_db(db, get_file_name())
-            case "4":
-                db, last_id = import_db(db, last_id, 'data08_1.txt')
-            case "5":
-                found_id = read(db, get_surname())
-                try:
-                    print_record(db, found_id)
-                except KeyError:
-                    print(f'\n{"="*30}\nЗапись не найдена!\n{"="*30}\n')
-            case "6":
-                x = False
 
 menu(phonebook, phonebook_last_id)
