@@ -100,7 +100,12 @@ def import_db(db: dict, last_id: int, filepath: str, delimeter: str = '#') -> tu
 
 # Update: Изменение полей выбранной записи. Выбор записи как и в Read, заполнение новыми значениями.
 def merge_db(db: dict, last_id: int) -> dict:
-    return NotImplementedError
+    # tmp_rec = new_rec.fromkeys(new_rec.keys())
+    tmp_rec = db[last_id].fromkeys(db[last_id])
+    # for key in new_rec.keys():
+    for key in db.keys():
+        tmp_rec[key] = db[key] if db[key] != "" else db[last_id][key]
+    return tmp_rec
 
 
 # Переписал меню
@@ -110,10 +115,12 @@ def menu(db: dict, last_id: int) -> None:
         print("Возможные действия: ")
         print("1. Создать запись: ")
         print("2. Вывести имеющиеся данные: ")
-        print("3. Экспортировть данные в файл: ")
+        print("3. Экспортировать данные в файл: ")
         print("4. Импортировать данные из файла: ")
         print("5. Найти контакт: ")
-        print("6. Выход")
+        print("6. Функция обновить (соединяет старую и новую запись)")
+        print("7. Удалить запись")
+        print("8. Выход")
         user_input = input("Введите действие > ")
         match user_input:
             case "1":
@@ -132,6 +139,20 @@ def menu(db: dict, last_id: int) -> None:
                 except KeyError:
                     print(f'\n{"="*30}\nЗапись не найдена!\n{"="*30}\n')
             case "6":
+                found_id = read(db, get_surname())
+                recs = read(db, get_surname())
+                if recs:
+                    idx = db.index(recs[0])
+                    rec = get_user_data(*db[last_id](mode = "updata"))
+                    rec = merge_db(rec. recs[0])
+                    db[idx] = rec
+            case "7":
+                found_id = read(db, get_surname())
+                recs = read(db, get_surname())
+                if recs:
+                    idx = db.index(recs[0])
+                    db.pop(idx)
+            case "8":
                 x = False
 
 
